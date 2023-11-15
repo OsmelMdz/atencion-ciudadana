@@ -28,14 +28,18 @@ export class TabsAdminPage {
           }
         }, {
           text: 'Aceptar',
-          handler: () => {
+          handler: async () => {
             // Cierra sesión (implementa esta función en tu servicio de autenticación si es necesario)
             this.apiService.logout();
             console.log('Cierre de sesión realizado');
             // Redirige a la carpeta de pestañas (tabs)
             this.navCtrl.navigateRoot('/tabs');
             //recarga la pagina de tabs
-            this.navCtrl.navigateForward('/tabs');
+            //this.navCtrl.navigateForward('/tabs');
+            // Espera un breve momento (por ejemplo, 500 ms) antes de recargar la página
+            await new Promise(resolve => setTimeout(resolve, 500));
+            // Recarga la página actual (la de pestañas)
+            location.reload();
           }
         }
       ]

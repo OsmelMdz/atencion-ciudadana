@@ -8,12 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Tab3Page {
   data: any = [];
-
+  isLargeScreen: boolean = true; // Inicialmente asumimos que la pantalla es grande
   constructor(private http: HttpClient) {
     this.getC();
   }
 
-  getC(){
+  getC() {
     const url = 'http://localhost/atencion_ciudadana/ver_contactos.php'; // Cambia la URL según tu configuración
     this.http.get<any[]>(url).subscribe(
       (data) => {

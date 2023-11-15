@@ -1,25 +1,32 @@
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-}
-
 .login-form {
-  width: 90%;
-  max-width: 400px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block; // Mostrar el formulario de inicio de sesión
 }
 
-.input-item {
-  margin-bottom: 16px;
+.register-form {
+  display: none; // Ocultar el formulario de registro por defecto
 }
 
-ion-button {
-  --background: darkred;
-  --color: white;
-  margin-top: 16px;
+.show-register-form .login-form {
+  display: none; // Ocultar el formulario de inicio de sesión cuando se muestra el formulario de registro
 }
+
+.show-register-form .register-form {
+  display: block; // Mostrar el formulario de registro cuando se hace clic en el botón
+}
+
+.show-login-form .login-form {
+  display: block; // Mostrar el formulario de inicio de sesión cuando se hace clic en el botón
+}
+
+.show-login-form .register-form {
+  display: none; // Ocultar el formulario de registro cuando se muestra el formulario de inicio de sesión
+}
+
+
+.form-container {
+  max-width: 500px; /* Ajusta este valor según tus necesidades */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+

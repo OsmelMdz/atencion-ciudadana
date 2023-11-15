@@ -1,32 +1,57 @@
-<ion-content [fullscreen]="true" class="login-page">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="8" offset-md="2">
-        <h1 style="position: inherit;text-align: center;">
-          <ion-text color="primary">Administrador</ion-text>
-          <ion-card-subtitle color="danger">personal autorizado</ion-card-subtitle>
-        </h1>
-        <ion-list>
-          <ion-item class="input-item">
-            <ion-label position="floating">Usuario</ion-label>
-            <ion-input [(ngModel)]="username" type="text" required></ion-input>
-          </ion-item>
-          <ion-item class="input-item">
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input [(ngModel)]="password" type="password" required></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" size-md="8" offset-md="2">
-        <ion-button [disabled]="!username || !password" expand="full" (click)="onLogin()">
-          Iniciar Sesión
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div class="ion-padding">
-    <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ showLoginForm ? 'Personal Autorizado' : (showRegisterForm ? 'Crear Nueva Cuenta' : 'Personal Autorizado') }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [ngClass]="{'show-register-form': showRegisterForm,'show-login-form': showLoginForm}">
+  <div class="login-form">
+    <!-- Tu formulario de inicio de sesión existente -->
+    <br><br><br><br>
+    <ion-card>
+      <form class="form-container">
+        <ion-item>
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input [(ngModel)]="nombre_completo" name="nombreCompleto" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="login()">Iniciar Sesión</ion-button>
+        <p>No tienes una cuenta</p>
+        <ion-button expand="full" (click)="toggleRegisterForm()" class="show-register-form">Registrate aquí</ion-button>
+      </form>
+    </ion-card>
+  </div>
+  <div class="register-form">
+    <!-- Tu formulario de registro existente -->
+    <br><br><br><br>
+    <ion-card>
+      <form (ngSubmit)="registrarCuenta()" #registroForm="ngForm" class="form-container">
+        <ion-item>
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input type="text" name="nombre_completo" [(ngModel)]="nombre_completo" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input type="text" name="telefono" [(ngModel)]="telefono" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico (administradores)</ion-label>
+          <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <ion-button expand="full" type="submit">Registrar</ion-button>
+        <br>
+        <ion-button expand="full" (click)="toggleLoginForm()" class="show-login-form">Regresar al Login</ion-button>
+      </form>
+    </ion-card>
   </div>
 </ion-content>

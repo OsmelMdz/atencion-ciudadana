@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    projectId:'atencionciudadana-b0edd',
+    appId:'1:263208147296:web:6ed8ce9dc7bdb5ebc02605',
+    databaseURL:'https://atencionciudadana-b0edd-default-rtdb.firebaseio.com',
+    storageBucket:'atencionciudadana-b0edd.appspot.com',
+    locationId:'us-central',
+    apiKey:'AIzaSyDLCZLVtix2bBE_mXmVRwImLf4XfQsbf2o',
+    authDomain:'atencionciudadana-b0edd.firebaseapp.com',
+    messagingSenderId:'263208147296',
+    measurementId:'G-HMYSKXH74T'
+  }
 };
 
 /*

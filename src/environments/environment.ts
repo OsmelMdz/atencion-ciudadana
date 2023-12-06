@@ -14,7 +14,8 @@ export const environment = {
     authDomain:'atencionciudadana-b0edd.firebaseapp.com',
     messagingSenderId:'263208147296',
     measurementId:'G-HMYSKXH74T'
-  }
+  },
+  mapsKey:'AIzaSyAQvf4itEEU3t9gzX34JVDKIt5e-GC1ecQ'
 };
 
 /*

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { ApiServiceService } from '../api-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-tabs-admin',
@@ -11,7 +12,7 @@ export class TabsAdminPage {
   handlerMessage = '';
   roleMessage = '';
 
-  constructor(private navCtrl: NavController, private apiService: ApiServiceService, private alertController: AlertController) { }
+  constructor(private navCtrl: NavController, private apiService: ApiServiceService, private alertController: AlertController, private authService:AuthServiceService) { }
 
   async logout() {
 
@@ -30,16 +31,28 @@ export class TabsAdminPage {
           text: 'Aceptar',
           handler: async () => {
             // Cierra sesión (implementa esta función en tu servicio de autenticación si es necesario)
-            this.apiService.logout();
-            console.log('Cierre de sesión realizado');
+            // this.apiService.logout();
+            // console.log('Cierre de sesión realizado');
             // Redirige a la carpeta de pestañas (tabs)
-            this.navCtrl.navigateRoot('/tabs');
+            // this.navCtrl.navigateRoot('/tabs');
             //recarga la pagina de tabs
             //this.navCtrl.navigateForward('/tabs');
             // Espera un breve momento (por ejemplo, 500 ms) antes de recargar la página
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // await new Promise(resolve => setTimeout(resolve, 500));
             // Recarga la página actual (la de pestañas)
+            // location.reload();
+            this.authService.signOut()
+            .then(async () => {
+              console.log('se ha cerado la sesión con exito');
+            this.navCtrl.navigateRoot('/tabs');
+            await new Promise(resolve => setTimeout(resolve, 500));
             location.reload();
+              
+            }).catch((error) => {
+              // An error happened.
+              console.log(error);
+              
+            }); 
           }
         }
       ]

@@ -33,6 +33,7 @@ export class TabsPage {
             } else {
               // El usuario no aceptó las políticas
               console.log('El usuario no aceptó las políticas de privacidad.');
+              this.router.navigate(['/tab12']);
             }
           },
         },

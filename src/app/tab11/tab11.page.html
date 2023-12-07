@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Perfil del Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+  <ion-card-content>
+    <ion-card-header>
+      <ion-card-title>Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card *ngFor="let dat of data">
+      <ion-text color="primary">
+        <span style="color: rgb(0, 0, 0); margin-left: 2%;"> Nombre:</span><h2 style="margin-left: 2%;">{{dat.nombre}}</h2>
+      </ion-text>
+      <ion-text color="primary">
+        <span style="color:rgb(0, 0, 0); margin-left: 2%;"> Telefono:</span> <h2 style="margin-left: 2%;">{{dat.telefono}}</h2>
+      </ion-text>
+      <ion-buttons>
+        <ion-button expand="full">Eliminar Cuenta</ion-button>
+      </ion-buttons>
+      <br>
+      <ion-buttons>
+        <ion-button expand="full" (click)="redirectToTabsAdmin()">Acceso si tienes perfil de Administrador</ion-button>
+      </ion-buttons>
+    </ion-card>
+  </ion-card-content>
+</ion-content>

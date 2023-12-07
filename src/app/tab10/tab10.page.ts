@@ -10,6 +10,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab10Page{
   data: any = [];
+  isLargeScreen: boolean = true; // Inicialmente asumimos que la pantalla es grande
+
 
   constructor(private http: HttpClient,private router: Router, private alertController: AlertController) {
     this.getP();

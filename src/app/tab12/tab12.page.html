@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registra Tus Datos</ion-title>
+    <ion-button (click)="redirectToTab1()"color="danger" size="default" slot="end">
+      <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form (ngSubmit)="registrarCuenta()" class="form-container">
+      <ion-item>
+        <ion-label position="floating">Nombre Completo</ion-label>
+        <ion-input type="text" name="nombre_completo" [(ngModel)]="nombre_completo" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Teléfono</ion-label>
+        <ion-input type="text" name="telefono" [(ngModel)]="telefono" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit">Registrar</ion-button>
+    </form>
+  </ion-card>
+</ion-content>

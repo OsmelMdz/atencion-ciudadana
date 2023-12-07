@@ -148,7 +148,7 @@ export class Tab4Page {
 
         if (response && response['message']) {
           // Usuario registrado con éxito
-          this.showAlert('Cuenta creada con éxito. Tu cuenta ha sido registrada con éxito.');
+          this.showAlert('Cuenta creada con éxito.');
 
           // Limpia los campos del formulario
           this.nombre_completo = '';
@@ -156,7 +156,7 @@ export class Tab4Page {
           this.email = '';
         }
       },
-      (error) => {
+      async (error) => {
         // Manejar el error de la solicitud
         console.error('Error en la solicitud:', error);
 
@@ -178,7 +178,6 @@ export class Tab4Page {
 
   async showAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Error',
       message: message,
       buttons: ['OK'],
     });

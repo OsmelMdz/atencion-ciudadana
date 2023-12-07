@@ -30,7 +30,11 @@ const routes: Routes = [
       {
         path:'tab10',
         loadChildren: () => import('../tab10/tab10.module').then(m => m.Tab10PageModule)
-      }
+      },
+      {
+        path: 'tab4',
+        loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
+      },
     ]
   }
 ];

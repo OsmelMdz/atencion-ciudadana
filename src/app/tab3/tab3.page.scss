@@ -6,6 +6,17 @@
   margin-right: auto;
   border-radius: 10px;
 } */
+
+.success-alert {
+  --ion-background-color: #4CAF50; /* Verde para éxito */
+  color: #ffffff; /* Texto blanco */
+}
+
+.error-alert {
+  --ion-background-color: #FF6347; /* Rojo para error */
+  color: #ffffff; /* Texto blanco */
+}
+
 ion-card {
   ion-card-header {
     padding-top: 5px;

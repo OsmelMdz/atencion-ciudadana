@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { ApiServiceService } from '../api-service.service';
 import { AuthServiceService } from '../services/auth-service.service';
+import { Component, NgZone } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-tabs-admin',
@@ -11,8 +12,12 @@ import { AuthServiceService } from '../services/auth-service.service';
 export class TabsAdminPage {
   handlerMessage = '';
   roleMessage = '';
+  tabsDisabled = false;
 
-  constructor(private navCtrl: NavController, private apiService: ApiServiceService, private alertController: AlertController, private authService:AuthServiceService) { }
+  constructor(
+    private zone: NgZone,
+    private router: Router,private navCtrl: NavController, private apiService: ApiServiceService, private alertController: AlertController, private authService: AuthServiceService) { }
+
 
   async logout() {
 
@@ -42,17 +47,17 @@ export class TabsAdminPage {
             // Recarga la página actual (la de pestañas)
             // location.reload();
             this.authService.signOut()
-            .then(async () => {
-              console.log('se ha cerado la sesión con exito');
-            this.navCtrl.navigateRoot('/tabs');
-            await new Promise(resolve => setTimeout(resolve, 500));
-            location.reload();
-              
-            }).catch((error) => {
-              // An error happened.
-              console.log(error);
-              
-            }); 
+              .then(async () => {
+                console.log('se ha cerado la sesión con exito');
+                this.navCtrl.navigateRoot('/tabs');
+                await new Promise(resolve => setTimeout(resolve, 500));
+                location.reload();
+
+              }).catch((error) => {
+                // An error happened.
+                console.log(error);
+
+              });
           }
         }
       ]
@@ -60,6 +65,7 @@ export class TabsAdminPage {
 
     await alert.present();
   }
+
 }
 
 

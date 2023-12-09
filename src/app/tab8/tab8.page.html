@@ -1,21 +1,14 @@
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>MONITOREO</ion-title>
-    </ion-toolbar>
-    <div id="map">
-
-    </div>
-  <ion-card  class="image-card">
-    <div class="image-container"></div>
-  </ion-card>
-  <ion-card>
-    <ion-button color="danger">
-      <ion-icon name="megaphone-outline"></ion-icon>
-    </ion-button>
-    <ion-button color="success">
-      <ion-icon name="call-outline"></ion-icon>
-    </ion-button>
-  </ion-card>
-</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-title>MONITOREO LAS 24 HRS</ion-title>
+  </ion-toolbar>
+  <ion-button (click)="showAlert()" color="danger">
+    Revisar Alertas &nbsp;
+    <ion-icon name="megaphone-outline"></ion-icon>
+    <!-- &nbsp;
+    <ion-badge color="warning">{{ numeroAlertas }}</ion-badge> -->
+  </ion-button>
+  <div class="container">
+    <capacitor-google-map #map></capacitor-google-map>
+  </div>
 </ion-content>

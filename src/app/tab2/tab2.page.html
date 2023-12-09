@@ -1,11 +1,7 @@
 <ion-content [fullscreen]="true">
-  <ion-button color="light" class="circular-button" (click)="showAlert()">
+  <ion-button color="light" class="circular-button" [disabled]="!botonHabilitado" (click)="showAlert()">
     <div class="circular">
       <ion-label>¡Presioname! <br><br> si estas en peligro</ion-label>
-  </div>
+    </div>
   </ion-button>
-<div class="container">
-  <capacitor-google-map #map></capacitor-google-map>
-</div>
-
 </ion-content>

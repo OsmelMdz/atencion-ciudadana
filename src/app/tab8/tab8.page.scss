@@ -1,34 +1,59 @@
-.image-card {
-  .image-container {
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .circular-button {
     width: 100%;
-    height: 0;
-    padding-top: 56.25%; /* Proporción 16:9 para mantener la relación de aspecto */
-    background-image: url('https://motor.elpais.com/wp-content/uploads/2022/01/google-maps-22.jpg');
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.2s; /* Agregar una transición suave al movimiento */
-    cursor: grab;
-  }
+    height: 100%;
+    top: 100%;
+    bottom: 100%;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
-  .image-container:active {
-    cursor: grabbing;
-  }
+    ion-label {
+      color: white;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
 
-  /* Efecto de movimiento al arrastrar */
-  .image-container:hover {
-    transform: scale(3.05);
+    &:hover {
+      background-color: darkred;
+    }
   }
 }
 
-ion-content {
-  #map {
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 150ms ease-in;
-    display: block;
-    &.show-map{
-      opacity: 1;
-    }
-  }
+.circular {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: darkred; /* Color de fondo del botón */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+}
+
+capacitor-google-map{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-content{
+  --background:none
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { SesionService } from '../sesion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { ApiServiceService } from '../api-service.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Component, ViewChild } from '@angular/core';
+import { AuthServiceService } from '../services/auth-service.service';
+import { getDatabase, ref, set, get } from "firebase/database";
 interface Response {
   error?: string;
   message?: string;
@@ -16,14 +16,16 @@ interface Response {
   templateUrl: './tab12.page.html',
   styleUrls: ['./tab12.page.scss'],
 })
-export class Tab12Page implements OnInit {
+export class Tab12Page{
 
+  @ViewChild('passwordInput', { static: true }) passwordInput: any;
   nombre_completo: string = '';
   telefono: string = '';
   showRegisterForm: boolean = false;
   showLoginForm: boolean = false;
 
-  constructor(private router: Router, private sesion: SesionService, private fb: FormBuilder, private alertController: AlertController, private menuCtrl: MenuController, private navCtrl: NavController, private authService: ApiServiceService, private http: HttpClient) { }
+
+  constructor(private fb: FormBuilder, private alertController: AlertController, private menuCtrl: MenuController, private navCtrl: NavController, private authService: ApiServiceService, private http: HttpClient, private authFireS: AuthServiceService, private router: Router) { }
 
   myForm: FormGroup = this.fb.group({
     nombre_completo: ['', [Validators.required, Validators.minLength(6)]],
@@ -79,7 +81,7 @@ export class Tab12Page implements OnInit {
           this.navCtrl.navigateRoot('/tabs/tab1');
         }
       },
-      async (error) => {
+      async (error: { status: number; statusText: string; }) => {
         // Manejar el error de la solicitud
         console.error('Error en la solicitud:', error);
 
@@ -103,6 +105,43 @@ export class Tab12Page implements OnInit {
       buttons: ['OK'],
     });
     await alert.present();
+  }
+
+  signUpFire() {
+    // Validar que el nombre_completo solo contenga letras y espacios, y tenga al menos 5 caracteres
+    const nombreCompletoRegex = /^[a-zA-Z\s]{5,}$/;
+    if (!nombreCompletoRegex.test(this.nombre_completo)) {
+      this.showAlert('El nombre completo debe contener al menos 5 letras y solo puede contener letras y espacios.');
+      return;
+    }
+
+    // Validar que el telefono solo contenga números y tenga exactamente 10 dígitos
+    const telefonoRegex = /^\d{10}$/;
+    if (!telefonoRegex.test(this.telefono)) {
+      this.showAlert('El formato del teléfono no es válido. Debe contener exactamente 10 dígitos sin espacios.');
+      return;
+    }
+
+
+    // Si todas las validaciones pasan, procede con el registro
+
+    this.authFireS.registerUser(this.nombre_completo, this.telefono)
+      .then((userCredential) => {
+        // Éxito al iniciar sesión
+        console.log('registro de usuario exitoso');
+        const user = userCredential.user;
+        localStorage.setItem('user', JSON.stringify(user));
+        const userData = {
+          role: 'User',
+          nombre_completo: this.nombre_completo,
+          telefono: this.telefono
+        };
+        // Guarda datos en Realtime Database
+        const database = getDatabase();
+        const userRef = ref(database, 'users/' + user.uid);
+        set(userRef, userData);
+        this.navCtrl.navigateForward('tabs/tab11');
+      })
   }
 
 

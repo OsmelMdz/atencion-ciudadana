@@ -19,29 +19,40 @@ export class Tab2Page {
 
   @ViewChild('map')mapRef!:ElementRef;
   map!:GoogleMap;
-
+  botonHabilitado: boolean = true;
   constructor(private alertController: AlertController, private auth:Auth,private datePipe: DatePipe) {
     this.getUid();
   }
-
-// latitude: number=0;
-// longitude: number=0;
-
 
   ngAfterViewInit() {
     this.createMap()
 
   }
   async showAlert() {
-    const alert = await this.alertController.create({
-      header: '¡Auxilio Enviado!',
-      message: 'Tu auxilio ha sido enviado correctamente.',
-     // buttons: ['Aceptar'],
-     
-    });
-    this.position()
-    await alert.present();
+    if (this.botonHabilitado) {
+      const alert = await this.alertController.create({
+        header: '¡Auxilio Enviado!',
+        message: 'Tu auxilio ha sido enviado correctamente.',
+      });
+      this.position()
+      this.deshabilitarBoton();
+      await alert.present();
+    }
   }
+
+  private deshabilitarBoton() {
+    this.botonHabilitado = false;
+
+    // Después de 10 segundos, volver a habilitar el botón
+    setTimeout(() => {
+      this.habilitarBoton();
+    }, 10000); // 10000 milisegundos = 10 segundos
+  }
+
+  private habilitarBoton() {
+    this.botonHabilitado = true;
+  }
+
 
   async createMap(){
     this.map = await GoogleMap.create({
@@ -87,9 +98,9 @@ export class Tab2Page {
       // const nuevaClave = 'positions';
       const newPositionRef = push(positionsRef);
       set(newPositionRef, dataPosition);
-      
+
     console.log('coordenadas actuales: ', currentPosition.lat, currentPosition.lng);
-    
+
   }
 uid:any;
 
@@ -97,16 +108,16 @@ uid:any;
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
-       this.uid= user.uid; 
+       this.uid= user.uid;
        console.log(this.uid);
-       
-       
+
+
     } else {
-        console.log('no hay usuario autenticado'); 
+        console.log('no hay usuario autenticado');
     }
   });
-  
-    
+
+
     }
-  
+
 }

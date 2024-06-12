@@ -34,7 +34,7 @@
     "@ionic-native/core": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "ionicons": "^7.0.0",
-    "rxjs": "^6.5.0",
+    "rxjs": "^6.5.3",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.6.1",
     "zone.js": "~0.13.0"
